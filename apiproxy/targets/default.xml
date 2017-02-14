@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TargetEndpoint name="default">
+    <DefaultFaultRule name="DefaultFaultRule">
+        <Step>
+            <FaultRules/>
+            <Name>CommonConcurrent-Rate-Limit</Name>
+        </Step>
+        <AlwaysEnforce>true</AlwaysEnforce>
+    </DefaultFaultRule>
+    <Description></Description>
+    <FaultRules/>
+    <Flows/>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response>
+            <Step>
+                <FaultRules/>
+                <Name>messageValueCalculation</Name>
+            </Step>
+            <Step>
+                <FaultRules/>
+                <Name>CommonConcurrent-Rate-Limit</Name>
+            </Step>
+        </Response>
+    </PostFlow>
+    <PreFlow name="PreFlow">
+        <Request>
+            <Step>
+                <FaultRules/>
+                <Name>CommonConcurrent-Rate-Limit</Name>
+            </Step>
+        </Request>
+        <Response/>
+    </PreFlow>
+    <ScriptTarget>
+        <Arguments/>
+        <EnvironmentVariables>
+            <EnvironmentVariable name="crucible_asset">https://enterprise-api-stg.autodesk.com/data/assets</EnvironmentVariable>
+            <EnvironmentVariable name="baseUrl">https://enterprise-api-stg.autodesk.com/v2/oauth/generateaccesstoken?grant_type=client_credentials</EnvironmentVariable>
+            <EnvironmentVariable name="client_id">dEGPKfHdRbYvGtzOZiq4LKSEdIPeJOyD</EnvironmentVariable>
+            <EnvironmentVariable name="client_secret">wCrViGZioG4NFEZp</EnvironmentVariable>
+            <EnvironmentVariable name="callback">www.autodesk.com</EnvironmentVariable>
+        </EnvironmentVariables>
+        <ResourceURL>node://app.js</ResourceURL>
+        <Properties/>
+    </ScriptTarget>
+</TargetEndpoint>

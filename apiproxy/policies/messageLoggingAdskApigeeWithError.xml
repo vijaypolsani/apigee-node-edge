@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<MessageLogging async="true" continueOnError="false" enabled="true" name="messageLoggingAdskApigeeWithError">
+    <DisplayName>messageLoggingAdskApigeeWithError</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <BufferMessage>false</BufferMessage>
+    <Syslog async="true">
+        <FormatMessage>false</FormatMessage>
+        <Host>splunk-ext.aws.autodesk.com</Host>
+        <Message>system.time=&quot;{systemTimestampIsoDate}&quot;, transactionid=&quot;{transaction_id}&quot;, organization=&quot;{organization.name}&quot;, environment=&quot;{environment.name}&quot;, proxy_name=&quot;{apiproxy.name}&quot;, proxy_revision=&quot;{apiproxy.revision}&quot;, consumer_host=&quot;{client.host}&quot;, consumer_ip=&quot;{client.ip}&quot;, client_received_start_timestamp=&quot;{client.received.start.timestamp}&quot;, client_received_end_timestamp=&quot;{client.received.end.timestamp}&quot;, client_sent_start_timestamp=&quot;{client.sent.start.timestamp}&quot;, client_sent_end_timestamp=&quot;{client.sent.end.timestamp}&quot;, request_verb=&quot;{request.verb}&quot;, request_uri=&quot;{request.uri}&quot;, request_path=&quot;{request.path}&quot;, virtual_host=&quot;{virtualhost.name}&quot;, proxy=&quot;{proxy.name}&quot;, proxy_basepath=&quot;{proxy.basepath}&quot;, proxy_url=&quot;{proxy.url}&quot;, response_status_code=&quot;{response.status.code}&quot;, message_status_code=&quot;{message.status.code}&quot;, error_message=&quot;{errorMessage}&quot;,request_payload=&quot;{requestlog}&quot;</Message>
+        <Port>6514</Port>
+        <Protocol>TCP</Protocol>
+        <SSLInfo>
+            <Ciphers/>
+            <ClientAuthEnabled>false</ClientAuthEnabled>
+            <Enabled>true</Enabled>
+            <IgnoreValidationErrors>false</IgnoreValidationErrors>
+            <Protocols/>
+        </SSLInfo>
+    </Syslog>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <logLevel>INFO</logLevel>
+    <NotificationIntervalInSec>0</NotificationIntervalInSec>
+</MessageLogging>

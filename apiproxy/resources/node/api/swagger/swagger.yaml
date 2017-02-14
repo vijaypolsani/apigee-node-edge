@@ -1,0 +1,88 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Otto API
+# during dev, should point to your local machine
+host: localhost:10011
+# basePath prefixes all resource paths 
+basePath: /
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /assets:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: assets
+    patch:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+        #- text/xml
+        #- text/html
+      operationId: patchAssets
+      parameters:
+        - name: AssetRequest
+          in: body
+          description: Handle an array of Asset objects for bulk Patch
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/AssetRequest"
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/AssetResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/AssetError"
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+  AssetRequest:
+      type: object
+      properties:
+        assetId:
+          type: string
+          description: The assetId which is a unique identifier for an Asset
+        contactId:
+          type: string
+          description: The contactId that is patched as the new SC contact
+      required:
+          - assetId
+          - contactId
+  AssetResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+        statusMessage:
+          type: string
+      required:
+          - statusCode
+          - statusMessage
+  AssetError:
+      type: object
+      properties:
+        statusCode:
+          type: number
+        statusMessage:
+          type: string
+      required:
+          - statusCode
+          - statusMessage

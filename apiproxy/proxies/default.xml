@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <Description></Description>
+    <FaultRules>
+        <FaultRule name="errorScrub_rule">
+            <Condition>((message.status.code != 200) AND (response.status.code != 200))</Condition>
+            <Step>
+                <Condition>((message.status.code == 500) OR (response.status.code == 500))</Condition>
+                <FaultRules/>
+                <Name>errorScrubPolicy500</Name>
+            </Step>
+            <Step>
+                <Condition>((message.status.code == 500) OR (response.status.code == 500))</Condition>
+                <FaultRules/>
+                <Name>errorJSONtoXML500</Name>
+            </Step>
+            <Step>
+                <FaultRules/>
+                <Name>messageValueCalculation</Name>
+            </Step>
+        </FaultRule>
+    </FaultRules>
+    <Flows/>
+    <PostClientFlow name="PostClientFlow">
+        <Request/>
+        <Response>
+            <Step>
+                <Condition>((message.status.code == 200) OR (response.status.code == 200))</Condition>
+                <FaultRules/>
+                <Name>messageLoggingAdskApigee</Name>
+            </Step>
+            <Step>
+                <Condition>((message.status.code != 200) AND (response.status.code != 200))</Condition>
+                <FaultRules/>
+                <Name>messageLoggingAdskApigeeWithError</Name>
+            </Step>
+        </Response>
+    </PostClientFlow>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response/>
+    </PostFlow>
+    <PreFlow name="PreFlow">
+        <Request>
+            <Step>
+                <FaultRules/>
+                <Name>CommonSpike-Arrest</Name>
+            </Step>
+            <Step>
+                <Condition>((request.verb != &quot;GET&quot; ) )</Condition>
+                <FaultRules/>
+                <Name>CommonJSON-Threat-Protection</Name>
+            </Step>
+            <Step>
+                <FaultRules/>
+                <Name>RequestJSONtoXML</Name>
+            </Step>
+            <Step>
+                <Condition>((request.header.timestamp == null) OR (request.header.timestamp == &quot;&quot;))</Condition>
+                <FaultRules/>
+                <Name>MissingTimestamp</Name>
+            </Step>
+            <Step>
+                <Condition>((request.header.signature == null) OR (request.header.signature == &quot;&quot;))</Condition>
+                <FaultRules/>
+                <Name>MissingSignature</Name>
+            </Step>
+            <Step>
+                <Condition>((request.header.Authorization == null) OR (request.header.Authorization == &quot;&quot;))</Condition>
+                <FaultRules/>
+                <Name>MissingAccessToken</Name>
+            </Step>
+            <Step>
+                <FaultRules/>
+                <Name>VerifyAccessToken</Name>
+            </Step>
+            <Step>
+                <Condition>(oauthV2.failed = &quot;true&quot;)</Condition>
+                <FaultRules/>
+                <Name>InvalidAccessToken</Name>
+            </Step>
+            <Step>
+                <FaultRules/>
+                <Name>VerifyApiKey</Name>
+            </Step>
+            <Step>
+                <FaultRules/>
+                <Name>HmacSha256Java</Name>
+            </Step>
+            <Step>
+                <Condition>allowed_time_stamp equals false</Condition>
+                <FaultRules/>
+                <Name>InvalidTimestamp</Name>
+            </Step>
+            <Step>
+                <Condition>(signature != signed_signature)</Condition>
+                <FaultRules/>
+                <Name>InvalidSignature</Name>
+            </Step>
+            <Step>
+                <FaultRules/>
+                <Name>remove-header-authorization</Name>
+            </Step>
+        </Request>
+        <Response/>
+    </PreFlow>
+    <HTTPProxyConnection>
+        <BasePath>/ottoassets</BasePath>
+        <Properties/>
+        <VirtualHost>default</VirtualHost>
+        <VirtualHost>secure</VirtualHost>
+    </HTTPProxyConnection>
+    <RouteRule name="default">
+        <TargetEndpoint>default</TargetEndpoint>
+    </RouteRule>
+</ProxyEndpoint>

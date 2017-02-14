@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="errorScrubPolicy500">
+    <DisplayName>errorScrubPolicy500</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <Set>
+        <Headers/>
+        <Payload contentType="application/json">
+            \{&quot;Error&quot;: 5000}
+            </Payload>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo type="response" transport="http" createNew="false"></AssignTo>
+</AssignMessage>

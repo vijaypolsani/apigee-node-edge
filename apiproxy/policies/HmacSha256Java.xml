@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<JavaCallout async="false" continueOnError="false" enabled="true" name="HmacSha256Java">
+    <DisplayName>HmacSha256Java</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <ClassName>com.javacallout.HmacSha</ClassName>
+    <ResourceURL>java://javaCallouts.jar</ResourceURL>
+</JavaCallout>

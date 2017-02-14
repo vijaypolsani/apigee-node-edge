@@ -1,0 +1,10 @@
+{
+  "author": {
+    "name": "otto-bulk-assets"
+  },
+  "version": "1.0.0",
+  "assets": {
+        "minParallel": 2,
+        "maxParallel": 10
+    }
+}

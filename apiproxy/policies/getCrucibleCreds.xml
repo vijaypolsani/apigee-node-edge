@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<KeyValueMapOperations encrypted="false" async="false" continueOnError="false" enabled="true" name="getCrucibleCreds">
+    <DisplayName>getCrucibleCreds</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <ExclusiveCache>false</ExclusiveCache>
+    <ExpiryTimeInSecs>-1</ExpiryTimeInSecs>
+    <InitialEntries/>
+    <Get assignTo="crucible.client_secret" index="1">
+        <Key>
+            <Parameter>Crucible.client_secret</Parameter>
+        </Key>
+    </Get>
+    <Get assignTo="crucible.callback" index="1">
+        <Key>
+            <Parameter>Crucible.callback</Parameter>
+        </Key>
+    </Get>
+    <Scope>environment</Scope>
+</KeyValueMapOperations>
