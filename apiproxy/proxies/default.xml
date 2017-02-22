@@ -47,15 +47,6 @@
                 <Name>CommonSpike-Arrest</Name>
             </Step>
             <Step>
-                <Condition>((request.verb != &quot;GET&quot; ) )</Condition>
-                <FaultRules/>
-                <Name>CommonJSON-Threat-Protection</Name>
-            </Step>
-            <Step>
-                <FaultRules/>
-                <Name>RequestJSONtoXML</Name>
-            </Step>
-            <Step>
                 <Condition>((request.header.timestamp == null) OR (request.header.timestamp == &quot;&quot;))</Condition>
                 <FaultRules/>
                 <Name>MissingTimestamp</Name>
@@ -108,6 +99,8 @@
         <BasePath>/ottoassets</BasePath>
         <Properties/>
         <VirtualHost>default</VirtualHost>
+        <VirtualHost>https_vhost</VirtualHost>
+        <VirtualHost>cadservices_vhost</VirtualHost>
         <VirtualHost>secure</VirtualHost>
     </HTTPProxyConnection>
     <RouteRule name="default">

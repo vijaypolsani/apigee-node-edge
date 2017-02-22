@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <APIProxy revision="25" name="ottoassets">
-    <Basepaths>/ottobulk1</Basepaths>
-    <Basepaths>/ottoassets</Basepaths>
-    <Basepaths>/ottoassets</Basepaths>
-    <Basepaths>/ottoassets</Basepaths>
-    <Basepaths>/ottoassets</Basepaths>
     <Basepaths>/ottoassets</Basepaths>
     <ConfigurationVersion majorVersion="4" minorVersion="0"/>
     <CreatedAt>1485807216066</CreatedAt>
     <CreatedBy>vijay.polsani@autodesk.com</CreatedBy>
-    <DisplayName>/ottobulk1</DisplayName>
+    <DisplayName>/ottoassets</DisplayName>
     <LastModifiedAt>1485807216066</LastModifiedAt>
     <LastModifiedBy>vijay.polsani@autodesk.com</LastModifiedBy>
     <Policies>
@@ -38,10 +33,6 @@
         <ProxyEndpoint>default</ProxyEndpoint>
     </ProxyEndpoints>
     <Resources>
-        <Resource>node://.DS_Store</Resource>
-        <Resource>node://.gitignore</Resource>
-        <Resource>node://Readme.md</Resource>
-        <Resource>node://api/.DS_Store</Resource>
         <Resource>node://api/controllers/assets.js</Resource>
         <Resource>node://api/helpers/crucibleClient.js</Resource>
         <Resource>node://api/helpers/oauthCrucibleClient.js</Resource>

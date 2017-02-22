@@ -11,16 +11,17 @@ const stringUtils = require('../utils/StringUtils')
 const log = require('../utils/Logging')
 
 
-var crucibleClient = function(baseUrl, data, callType, oAuthToken) {
+var crucibleClient = function (baseUrl, data, callType, oAuthToken) {
     log.info('BaseUrl: ', baseUrl)
     log.info('Data: ', data)
     log.info('method: ', callType)
     log.info('oAuthToken: ', oAuthToken)
 
-    const client_secret = 'Q5okReeWqWJfggHf';
-    const callback = 'www.autodesk.com';
+    const client_secret = process.env.client_secret;
+    const callback = process.env.callback;
 
-    // Generate timestamp header
+
+// Generate timestamp header
     var timestamp = Math.floor(Date.now() / 1000);
 
     // Generate signature header
@@ -30,7 +31,7 @@ var crucibleClient = function(baseUrl, data, callType, oAuthToken) {
 
     var headers = {
         Authorization: 'Bearer ' + oAuthToken,
-        CSN: 5122424540,
+        CSN: 999999999,
         signature: api_signature,
         timestamp: timestamp,
         sender: 'otto-api'
@@ -60,9 +61,9 @@ var crucibleClient = function(baseUrl, data, callType, oAuthToken) {
     }
     log.debug('options: ', options)
 
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         request(options,
-            function(error, response, body) {
+            function (error, response, body) {
                 if (error) {
                     log.debug('Error in Crucible Client Call: ', error)
                     var result = {
@@ -78,7 +79,7 @@ var crucibleClient = function(baseUrl, data, callType, oAuthToken) {
                     }
                     log.info('Success in Crucible Client Call Status Code: ', response.statusCode)
                     log.debug('Success in Crucible Client Call Data: ', body)
-                    return resolve(result)
+                    return resolve (result)
                 } else {
                     var result = {
                         statusCode: response.statusCode,
@@ -92,3 +93,4 @@ var crucibleClient = function(baseUrl, data, callType, oAuthToken) {
     }).nodeify()
 };
 module.exports.crucibleClient = crucibleClient;
+
